@@ -3,5 +3,11 @@ class ListingsController < ApplicationController
     #check to see if user is logged in before allowing them access to listings methods
     def index
         @listings=Listing.all
+        
     end
+
+    def new 
+        @listing=Listing.new
+    end
+
 end
