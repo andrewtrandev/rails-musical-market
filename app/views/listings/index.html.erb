@@ -1,6 +1,8 @@
 <h1>Musician Market</h1>
 
 <%= link_to "Sell Instruments", new_listing_path%>
+<button data-stripe="donate">Donate $10</button>
+<%# data-stripe is a custom variable?%>
 
 <ul>
     <% for listing in @listings %>
@@ -9,3 +11,20 @@
     </li>
     <%end%>
 </ul>
+
+<%# below code is the javascript needed to get the Donate button to work%>
+<script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+    document
+        .querySelector("[data-stripe='donate']")
+        .addEventListener("click", () => {
+        const stripe = Stripe(
+            "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+        );
+
+        stripe.redirectToCheckout({
+            sessionId: "<%= @session_id %>"
+        });
+        });
+</script>

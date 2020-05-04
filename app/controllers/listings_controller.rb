@@ -4,6 +4,8 @@ class ListingsController < ApplicationController
     def index
         @listings=Listing.all
         
+        generate_stripe_session
+       
     end
 
     def new 
@@ -81,5 +83,36 @@ class ListingsController < ApplicationController
     def listing_params
         params.require(:listing).permit(:title, :description, :price)
     end
+
+    def get_users_listing
+        @listing = current_user.listings.find_by_id(params["id"])
+        #make a before_action for edit, update destroy
+    end
+
+
+    def generate_stripe_session
+         #below code is used to create a session
+         session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            customer_email: current_user.email,
+            line_items: [{
+            name: "Donate to Musician Marketplace!",
+            currency: 'aud',
+            quantity: 1,
+            amount: 1000
+            }],
+            payment_intent_data: {
+            metadata: {
+            user_id: current_user.id,
+            }
+            },
+            success_url: "#{root_url}pages/donated?userId=#{current_user.id}",
+            
+            cancel_url: "#{root_url}"
+            )
+    
+            @session_id = session.id
+        end
+
 
 end

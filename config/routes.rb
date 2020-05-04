@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get "/", to: "pages#home", as:"root"
   #get request through home, goes through pages controller and home method, prefix is root
 
+  get "/pages/donated", to:"pages#donated"
+  #render page for a successful donation
+
   get "/listings", to:"listings#index", as: "listings"
 
   get "/listings/new", to:"listings#new", as:"new_listing"
