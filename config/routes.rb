@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   get "/listings/new", to:"listings#new", as:"new_listing"
 
+  post "/listings", to:"listings#create"
+  
 end
