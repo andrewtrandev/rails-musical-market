@@ -60,6 +60,23 @@ class ListingsController < ApplicationController
         end
     end
 
+
+    def destroy
+        #we want only users who create listings to be able to delete thos e listings
+        @listing =current_user.listings.find_by_id(params["id"])
+
+        if @listing
+            @listing.destroy
+        end
+        
+        redirect_to listings_path
+    end
+
+
+
+
+
+
     private
     def listing_params
         params.require(:listing).permit(:title, :description, :price)

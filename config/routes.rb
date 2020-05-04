@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   patch "/listings/:id", to: "listings#update"
 
+  delete "/listings/:id", to: "listings#destroy"
+
 end

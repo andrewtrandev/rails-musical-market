@@ -11,7 +11,12 @@ Seller's email: <%= @listing.user.email %>
 
 <br>
 <%if current_user.id == @listing.user.id %>
+ <%# checks to see if current user is same as the one who created the listing%>
     <%= link_to "edit", edit_listing_path(@listing.id)%>
+    
+    <%= form_with model: @listing, local: true, method: "delete" do |form| %>
+    <%= submit_tag "delete"%>
+    <% end %>
 <% end %>
 <%# link to edit %>
 
