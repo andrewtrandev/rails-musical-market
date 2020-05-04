@@ -8,5 +8,14 @@ Rails.application.routes.draw do
   get "/listings/new", to:"listings#new", as:"new_listing"
 
   post "/listings", to:"listings#create"
-  
+
+  get "/listings/:id", to:"listings#show", as:"listing"
+
+  get "/listings/:id/edit", to:"listings#edit", as:"edit_listing"
+
+  put "/listings/:id", to:"listings#update"
+  #good to have put patch even though form uses the patch method
+
+  patch "/listings/:id", to: "listings#update"
+
 end

@@ -5,7 +5,7 @@
 <ul>
     <% for listing in @listings %>
     <li>
-        <%= listing.title %>  -  <%= number_to_currency(listing.price) %>
+        <%= link_to "#{listing.title} - #{number_to_currency(listing.price)}", listing_path(listing.id) %>
     </li>
     <%end%>
 </ul>
